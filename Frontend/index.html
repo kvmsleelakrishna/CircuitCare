@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CircuitCare | Service Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <h2 class="brand">⚡ CircuitCare</h2>
+
+        <p class="nav-label">WORKSPACE</p>
+        <a class="nav-link active" href="#dashboard">▦ Dashboard</a>
+        <a class="nav-link" href="#tickets">▤ Service Tickets</a>
+        <a class="nav-link" href="#inventory">▣ Inventory</a>
+
+        <div class="sidebar-footer">
+            <span class="status-dot"></span>
+            System ready
+        </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">SERVICE MANAGEMENT</p>
+                <h1>Dashboard</h1>
+                <p class="muted">Monitor repairs and electronic components.</p>
+            </div>
+            <button class="primary-btn" id="newTicketBtn">
+                + New Ticket
+            </button>
+        </header>
+
+        <section class="stats-grid">
+            <article class="stat-card">
+                <p>Total Tickets</p>
+                <h2 id="totalTickets">0</h2>
+                <span class="stat-note">All service requests</span>
+            </article>
+
+            <article class="stat-card">
+                <p>Pending</p>
+                <h2 id="pendingTickets">0</h2>
+                <span class="stat-note">Awaiting service</span>
+            </article>
+
+            <article class="stat-card">
+                <p>In Progress</p>
+                <h2 id="progressTickets">0</h2>
+                <span class="stat-note">Currently being repaired</span>
+            </article>
+
+            <article class="stat-card">
+                <p>Completed</p>
+                <h2 id="completedTickets">0</h2>
+                <span class="stat-note">Repairs finished</span>
+            </article>
+        </section>
+
+        <section class="panel" id="tickets">
+            <div class="panel-heading">
+                <div>
+                    <h2>Recent Service Tickets</h2>
+                    <p class="muted">Track your latest repair requests.</p>
+                </div>
+
+                <div class="table-controls">
+                    <input id="searchInput"
+                           type="search"
+                           placeholder="Search tickets...">
+
+                    <select id="statusFilter">
+                        <option value="All">All statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Customer</th>
+                            <th>Device</th>
+                            <th>Issue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketTableBody"></tbody>
+                </table>
+            </div>
+
+            <p id="emptyMessage" class="empty-message" hidden>
+                No service tickets found.
+            </p>
+        </section>
+
+        <section class="panel" id="inventory">
+            <div class="panel-heading">
+                <div>
+                    <h2>Component Inventory</h2>
+                    <p class="muted">Monitor available spare parts.</p>
+                </div>
+                <span class="section-tag">STOCK OVERVIEW</span>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Available Stock</th>
+                            <th>Minimum Stock</th>
+                            <th>Unit Price</th>
+                            <th>Stock Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            CircuitCare · Electronics Service Management
+        </footer>
+    </main>
+</div>
+
+<div class="modal" id="ticketModal" hidden>
+    <form class="modal-card" id="ticketForm">
+        <div class="panel-heading">
+            <h2>Create Service Ticket</h2>
+            <button type="button" class="close-btn" id="closeModal">
+                ✕
+            </button>
+        </div>
+
+        <label for="customerName">Customer Name</label>
+        <input id="customerName" required maxlength="100">
+
+        <label for="deviceName">Device Name</label>
+        <input id="deviceName" required maxlength="100">
+
+        <label for="issueDescription">Issue Description</label>
+        <textarea id="issueDescription" required maxlength="255"></textarea>
+
+        <button class="primary-btn" type="submit">
+            Create Ticket
+        </button>
+
+        <p id="formMessage" class="muted" role="status"></p>
+    </form>
+</div>
+
+</body>
+</html>
